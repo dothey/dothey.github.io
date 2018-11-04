@@ -9,7 +9,7 @@
       csv_header,
       unique_category_counts,
       step = 0,
-      arbitraryCsvFile="https://dothey.github.io/assets/calhacks_greys.csv";
+      arbitraryCsvFile="https://dothey.github.io/assets/calhacks_greys_edit.csv";
 
 
 function createGraph(g){
@@ -79,7 +79,7 @@ function generateColorMap(list){
 }
 function generateVertex(name,i,n,columnColorMap,cell_idx,row_idx){
 if (!name.includes("FALSE") && !(name === "TRUE")) {
-  console.log("generating vertex.. "+name)
+  //console.log("generating vertex.. "+name)
  return {
           id:  name,
           label: name,
@@ -132,7 +132,7 @@ function csv2graph(body){
       // n choose 2 cells in a row
       for(var j=length-1; j > i; j--){
         if (cells[j] === "TRUE" && !(cell_name_a === "TRUE") && !cell_name_a.includes("FALSE")) {
-        console.log(cell_name_a+ " to "+csv_header[j])  
+        //console.log(cell_name_a+ " to "+csv_header[j])  
         g.edges.push({
           id: 'e'+edge_id++,
           source: cell_name_a,
