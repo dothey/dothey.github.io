@@ -30,7 +30,7 @@ function createGraph(g){
           //drawEdges:false,
           minNodeSize:0,
           maxNodeSize:0,
-/*           autoSettings: true,
+           autoSettings: true,
     linLogMode: false,
     outboundAttractionDistribution: false,
     adjustSizes: true,
@@ -46,7 +46,7 @@ function createGraph(g){
     totalSwinging: 0,
     totalEffectiveTraction: 0,
     complexIntervals: 500,
-    simpleIntervals: 1000,*/
+    simpleIntervals: 1000,
           //batchEdgesDrawing:true,
 //          webglEdgesBatchSize:1000
         }
@@ -97,8 +97,8 @@ function csv2graph(body){
   var num_rows = rows.length;
   var vtx_cache={};
   var row,cells;
-  num_rows = 40;
-  var num_columns = 9;
+  num_rows = 18;
+  var num_columns = 18;
   var byrow = rows.slice(0,num_rows);
   csv_header = byrow.shift();
   csv_header = csv_header.split(/\,/).slice(0,num_columns);
@@ -112,8 +112,9 @@ function csv2graph(body){
     cells = byrow[a].split(/\,/).slice(0,num_columns);
     // for every cell
     for(var i in cells){
-      cell_name_a = csv_header[i]+":"+cells[i];
+      cell_name_a = cells[i];
       //is the vertex unique?
+      console.log(cell_name_a)
       if(typeof vtx_cache[cell_name_a] === "undefined" && !cell_name_a.includes("FALSE")){
         o = generateVertex(cell_name_a, ++vtx_id, num_rows, columnColorMap, i,a );
         vtx_cache[cell_name_a] = i;
@@ -122,12 +123,12 @@ function csv2graph(body){
       }
       // n choose 2 cells in a row
       for(var j=length-1; j > i; j--){
-        if (cells[j] === "TRUE" && !cell_name_a.includes("FALSE")) {
-        console.log(cell_name_a+ " to "+csv_header[j]+":"+cells[j])  
+        if (cells[j] === "TRUE" && !(cell_name_a === "TRUE") && !cell_name_a.includes("FALSE")) {
+        console.log(cell_name_a+ " to "+csv_header[j])  
         g.edges.push({
           id: 'e'+edge_id++,
           source: cell_name_a,
-          target: csv_header[j]+":"+cells[j],
+          target: csv_header[j],
         });
         
       }}   
