@@ -9,7 +9,7 @@
       csv_header,
       unique_category_counts,
       step = 0,
-      arbitraryCsvFile="~/dothey/assets/relationships_1.csv";
+      arbitraryCsvFile="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6337/hondiff.csv";
 
 
 function createGraph(g){
