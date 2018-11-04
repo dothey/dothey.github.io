@@ -23,14 +23,14 @@ function createGraph(g){
         container: 'graph-container',
         type: 'webgl',
         settings: {
-          labelThreshold:10,
+          labelThreshold: 5,
           animationsTime: 4000,
           skipErrors: true,
           //edgeColor:"rgb(255,0,0)",
           //drawEdges:false,
           minNodeSize:0,
           maxNodeSize:0,
-/*           autoSettings: true,
+           autoSettings: true,
     linLogMode: false,
     outboundAttractionDistribution: false,
     adjustSizes: true,
@@ -46,7 +46,7 @@ function createGraph(g){
     totalSwinging: 0,
     totalEffectiveTraction: 0,
     complexIntervals: 500,
-    simpleIntervals: 1000,*/
+    simpleIntervals: 1000,
           //batchEdgesDrawing:true,
 //          webglEdgesBatchSize:1000
         }
