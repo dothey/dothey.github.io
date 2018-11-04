@@ -53,7 +53,7 @@ function createGraph(g){
       });
   //not sure how to give options to forceatlas2
 /*  s.forceatlas2.options={
-
+   
   };*/
   s.startForceAtlas2();
 }
@@ -66,7 +66,7 @@ function generateColorMap(list){
       Math.floor(5000000+i*(10777215/len)).toString(16)+ '000000').substr(0,6);
   }
   return cmap;
-
+  
 }
 function generateVertex(name,i,n,columnColorMap,cell_idx,row_idx){
  return {
@@ -89,9 +89,9 @@ function generateVertex(name,i,n,columnColorMap,cell_idx,row_idx){
 
 
 function csv2graph(body){
-
+ 
   var rows = body.split(/\r\n|\n/);
-
+  
   var num_rows = rows.length;
   var vtx_cache={};
   var row,cells;
@@ -119,13 +119,13 @@ function csv2graph(body){
         g.nodes.push(o);
       }
       // n choose 2 cells in a row
-      for(var j=length-1; j > i; j--){
+      for(var j=length-1; j > i; j--){ 
         g.edges.push({
           id: 'e'+edge_id++,
           source: cell_name_a,
           target: csv_header[j]+":"+cells[j],
         });
-      }
+      }   
     }
   }
   return g;
