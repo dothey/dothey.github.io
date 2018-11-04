@@ -9,7 +9,7 @@
       csv_header,
       unique_category_counts,
       step = 0,
-      arbitraryCsvFile="https://l.messenger.com/l.php?u=https%3A%2F%2Fcdn.fbsbx.com%2Fv%2Ft59.2708-21%2F44916980_1028209007366040_5927902531815473152_n.csv%2Fga-s1.csv%3F_nc_cat%3D105%26_nc_ht%3Dcdn.fbsbx.com%26oh%3D112e1106f7faee6b53a4951a8750d27f%26oe%3D5BE035A4%26dl%3D1&h=AT0KgfHiAKDVr-I5KcuJLgYW02jHjU20e4jYsJXHmowHABvXDBV-VWGSHZJBX4H_LwssAuFMJdOWLRchTnqsngzfDBhyRUO14jRIk3OZvHe-pfzLNRIUPsZmoOq70iPqJaWRwSI";
+      arbitraryCsvFile="~/dothey/assets/relationships_1.csv";
 
 
 function createGraph(g){
@@ -69,6 +69,10 @@ function generateColorMap(list){
   
 }
 function generateVertex(name,i,n,columnColorMap,cell_idx,row_idx){
+if name == "FALSE" {
+return null    
+} 
+
  return {
           id:  name,
           label: name,
