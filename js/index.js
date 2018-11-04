@@ -55,7 +55,6 @@ function createGraph(g){
 /*  s.forceatlas2.options={
    
   };*/
-  s.stopForceAtlas2();
   sigma.plugins.animate(
     s,
     {
