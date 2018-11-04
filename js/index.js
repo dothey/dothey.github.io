@@ -55,15 +55,14 @@ function createGraph(g){
 /*  s.forceatlas2.options={
    
   };*/
-  s.startForceAtlas2();
   s.stopForceAtlas2();
   sigma.plugins.animate(
     s,
     {
-      x: 'circular_x',
-      y: 'circular_y',
-      size: 'circular_size',
-      color: 'circular_color'
+      x: 'grid_x',
+      y: 'grid_y',
+      size: 'grid_size',
+      color: 'grid_color'
     }
   );
   s.startForceAtlas2()
