@@ -9,7 +9,7 @@
       csv_header,
       unique_category_counts,
       step = 0,
-      arbitraryCsvFile="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6337/hondiff.csv";
+      arbitraryCsvFile="https://dothey.github.io/assets/relationships_1.csv";
 
 
 function createGraph(g){
@@ -23,14 +23,14 @@ function createGraph(g){
         container: 'graph-container',
         type: 'webgl',
         settings: {
-          labelThreshold: 5,
+          labelThreshold:5,
           animationsTime: 4000,
-          skipErrors: true,
+          skipErrors: false,
           //edgeColor:"rgb(255,0,0)",
           //drawEdges:false,
           minNodeSize:0,
           maxNodeSize:0,
-           autoSettings: true,
+/*           autoSettings: true,
     linLogMode: false,
     outboundAttractionDistribution: false,
     adjustSizes: true,
@@ -46,7 +46,7 @@ function createGraph(g){
     totalSwinging: 0,
     totalEffectiveTraction: 0,
     complexIntervals: 500,
-    simpleIntervals: 1000,
+    simpleIntervals: 1000,*/
           //batchEdgesDrawing:true,
 //          webglEdgesBatchSize:1000
         }
@@ -69,8 +69,8 @@ function generateColorMap(list){
   
 }
 function generateVertex(name,i,n,columnColorMap,cell_idx,row_idx){
-console.log(name)
-
+if (!name.includes("FALSE")) {
+  console.log("generating vertex..")
  return {
           id:  name,
           label: name,
@@ -87,7 +87,7 @@ console.log(name)
           grid_size: 4,
           grid_color: columnColorMap[name.split(":")[0]]
         };
-}
+}}
 
 
 function csv2graph(body){
@@ -114,20 +114,23 @@ function csv2graph(body){
     for(var i in cells){
       cell_name_a = csv_header[i]+":"+cells[i];
       //is the vertex unique?
-      if(typeof vtx_cache[cell_name_a] === "undefined"){
+      if(typeof vtx_cache[cell_name_a] === "undefined" && !cell_name_a.includes("FALSE")){
         o = generateVertex(cell_name_a, ++vtx_id, num_rows, columnColorMap, i,a );
         vtx_cache[cell_name_a] = i;
         // apply basic attributes
         g.nodes.push(o);
       }
       // n choose 2 cells in a row
-      for(var j=length-1; j > i; j--){ 
+      for(var j=length-1; j > i; j--){
+        if (cells[j] === "TRUE" && !cell_name_a.includes("FALSE")) {
+        console.log(cell_name_a+ " to "+csv_header[j]+":"+cells[j])  
         g.edges.push({
           id: 'e'+edge_id++,
           source: cell_name_a,
           target: csv_header[j]+":"+cells[j],
         });
-      }   
+        
+      }}   
     }
   }
   return g;
