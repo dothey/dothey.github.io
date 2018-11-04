@@ -69,7 +69,7 @@ function generateColorMap(list){
   
 }
 function generateVertex(name,i,n,columnColorMap,cell_idx,row_idx){
-if name == "FALSE" {
+if (name === "FALSE") {
 return null    
 } 
 
