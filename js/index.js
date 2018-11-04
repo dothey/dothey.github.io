@@ -9,7 +9,7 @@
       csv_header,
       unique_category_counts,
       step = 0,
-      arbitraryCsvFile="https://dothey.github.io/assets/relationships_1.csv";
+      arbitraryCsvFile="https://dothey.github.io/assets/calhacks_greys_edit.csv";
 
 
 function createGraph(g){
@@ -23,24 +23,24 @@ function createGraph(g){
         container: 'graph-container',
         type: 'webgl',
         settings: {
-          labelThreshold:5,
-          animationsTime: 4000,
+          labelThreshold:3,
+          animationsTime: 100,
           skipErrors: false,
           //edgeColor:"rgb(255,0,0)",
           //drawEdges:false,
           minNodeSize:0,
           maxNodeSize:0,
            autoSettings: true,
-    linLogMode: false,
+    linLogMode: true,
     outboundAttractionDistribution: false,
     adjustSizes: true,
     edgeWeightInfluence: .1,
     scalingRatio: 1,
-    strongGravityMode: false,
+    strongGravityMode: true,
     gravity: 10,
     jitterTolerance: 2,
-    barnesHutOptimize: true,
-    barnesHutTheta: 1.2,
+    barnesHutOptimize: false,
+    barnesHutTheta: 1.5,
     speed: 10,
     outboundAttCompensation: 1,
     totalSwinging: 0,
@@ -56,6 +56,17 @@ function createGraph(g){
    
   };*/
   s.startForceAtlas2();
+  s.stopForceAtlas2();
+  sigma.plugins.animate(
+    s,
+    {
+      x: 'circular_x',
+      y: 'circular_y',
+      size: 'circular_size',
+      color: 'circular_color'
+    }
+  );
+  s.startForceAtlas2()
 }
 
 function generateColorMap(list){
@@ -69,8 +80,8 @@ function generateColorMap(list){
   
 }
 function generateVertex(name,i,n,columnColorMap,cell_idx,row_idx){
-if (!name.includes("FALSE")) {
-  console.log("generating vertex..")
+if (!name.includes("FALSE") && !(name === "TRUE")) {
+  console.log("generating vertex.. "+name)
  return {
           id:  name,
           label: name,
@@ -97,8 +108,8 @@ function csv2graph(body){
   var num_rows = rows.length;
   var vtx_cache={};
   var row,cells;
-  num_rows = 18;
-  var num_columns = 18;
+  num_rows = rows.length;
+  var num_columns = rows.length;
   var byrow = rows.slice(0,num_rows);
   csv_header = byrow.shift();
   csv_header = csv_header.split(/\,/).slice(0,num_columns);
@@ -114,8 +125,7 @@ function csv2graph(body){
     for(var i in cells){
       cell_name_a = cells[i];
       //is the vertex unique?
-      console.log(cell_name_a)
-      if(typeof vtx_cache[cell_name_a] === "undefined" && !cell_name_a.includes("FALSE")){
+      if(typeof vtx_cache[cell_name_a] === "undefined" && !(cell_name_a === "TRUE") && !cell_name_a.includes("FALSE")){
         o = generateVertex(cell_name_a, ++vtx_id, num_rows, columnColorMap, i,a );
         vtx_cache[cell_name_a] = i;
         // apply basic attributes
