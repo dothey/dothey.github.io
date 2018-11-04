@@ -9,7 +9,7 @@
       csv_header,
       unique_category_counts,
       step = 0,
-      arbitraryCsvFile="https://dothey.github.io/assets/calhacks_greys_edit.csv";
+      arbitraryCsvFile="https://dothey.github.io/assets/calhacks_greys.csv";
 
 
 function createGraph(g){
